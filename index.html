@@ -102,7 +102,7 @@
             let APIKEY = "Dsuxat5V1ccrtvIIBdrxk731WPrSs22l";
             let RandomNumber = Math.floor(Math.random() * (100 - 1) + 1);
             ev.preventDefault(); 
-            let url = `https://api.giphy.com/v1/gifs/search?api_key=${APIKEY}&limit=100&q=thankyou&offset=${RandomNumber}`;
+            let url = `https://api.giphy.com/v1/gifs/search?api_key=${APIKEY}&limit=100&q=thankyou&offset=${RandomNumber}&fixed_height=200`;
             console.log(APIKEY)
             console.log(url);
             //var image_x = document.getElementsByClassName('out').classList.length;
@@ -120,6 +120,8 @@
             let img = document.createElement("img");
             img.src = content.data[0].images.downsized.url;
             img.alt = content.data[0].title;
+            console.log(img)
+            document.querySelector(".out").innerHTML = ""
             fig.appendChild(img);
             let out = document.querySelector(".out");
             out.insertAdjacentElement("afterbegin", fig);

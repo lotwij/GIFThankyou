@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="shortcut icon" href="./assets/img/favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css"
+    />
+    <title>Bedankjes </title>
+  </head>
+  <body class="text-gray-800 antialiased">
+    <main>
+
+      <div
+        class="relative pt-16 pb-32 flex content-center items-center justify-center"
+        style="min-height: 75vh;">
+        <div
+          class="absolute top-0 w-full h-full bg-center bg-cover"
+          style='background-image: url("https://images.unsplash.com/photo-1436076863939-06870fe779c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80;auto=format&amp;fit=crop&amp;w=1267&amp;q=80");'
+        >
+          <span
+            id="blackOverlay"
+            class="w-full h-full absolute opacity-75 bg-black"
+          ></span>
+            <div class="container mx-auto px-4">
+              <div class="flex flex-wrap">
+                <div class="lg:pt-12 pt-6 w-full md:w-4/12 px-400 text-center">
+                </div>
+                <div class="pt-6 w-full md:w-4/12 px-4 text-center" style="margin-top: 200px;">
+                  <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg" id="gif">
+                    <div class="out" id="GIFImage"></div>
+                    <div class="px-4 py-5 flex-auto">
+                    </div>
+                </div>
+                <form>
+                  <button
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
+                    type="button"
+                    id="btnGIF" 
+                    style="display: inline; 
+                    transition: all 0.15s ease 0s; 
+                    text-align: center; 
+                    width: 50%;
+                    z-index:1;
+                    position:relative; 
+                    padding: 3%;">Complete Payment
+                  </button>
+              </form>
+              </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+          <svg
+            class="absolute bottom-0 overflow-hidden"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+            version="1.1"
+            viewBox="0 0 2560 100"
+            x="0"
+            y="0">
+            <polygon
+              class="text-gray-300 fill-current"
+              points="2560 0 2560 100 0 100"
+            ></polygon>
+          </svg>
+        </div>
+      </div>
+      <section class="relative py-20">
+        <div
+          class="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20"
+          style="height: 80px;">
+          <svg
+            class="absolute bottom-0 overflow-hidden"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+            version="1.1"
+            viewBox="0 0 2560 100"
+            x="0"
+            y="0">
+            <polygon
+              class="text-white fill-current"
+              points="2560 0 2560 100 0 100"
+            ></polygon>
+          </svg>
+        </div>
+      </section>
+    </main>
+    <script>
+    document.addEventListener("DOMContentLoaded", init);
+      function init() {
+        document.getElementById("btnGIF").addEventListener("click", ev => {
+            let APIKEY = "Dsuxat5V1ccrtvIIBdrxk731WPrSs22l";
+            let RandomNumber = Math.floor(Math.random() * (100 - 1) + 1);
+            ev.preventDefault(); 
+            let url = `https://api.giphy.com/v1/gifs/search?api_key=${APIKEY}&limit=100&q=thankyou&offset=${RandomNumber}`;
+            console.log(APIKEY)
+            console.log(url);
+            //var image_x = document.getElementsByClassName('out').classList.length;
+            //console.log(image_x);
+            //if (image_x > 0){
+            //    PrevImage = document.getElementsByClassName('out')
+            //    PrevImage[0].parentNode.removeChild(PrevImage[0]);
+            //    }
+            fetch(url)
+            .then(response => response.json())
+            .then(content => {
+            console.log(content.data);
+            console.log('META', content.meta);
+            let fig = document.createElement("figure");
+            let img = document.createElement("img");
+            img.src = content.data[0].images.downsized.url;
+            img.alt = content.data[0].title;
+            fig.appendChild(img);
+            let out = document.querySelector(".out");
+            out.insertAdjacentElement("afterbegin", fig);
+                })
+            .catch(err => {
+                console.error(err);
+            })
+        });
+    }
+    </script>
+  </body>
+</html>
